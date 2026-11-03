@@ -4,7 +4,6 @@
  */
 package cieloslimpios;
 
-import java.lang.classfile.Superclass;
 import java.util.Random;
 import java.util.Scanner;
 
