@@ -23,12 +23,8 @@ public class Ecosistema_Smart_Home {
     public static void main(String[] args) {
         
         //Dispositivo Foco = new Dispositivo("Phillips");
-        Dispositivo miCasa[] ={
-                                new FocoInteligente("Phillips"),
-                                new CerraduraInteligente("Yale")
-                                };
-        
-            
+        Dispositivo miCasa[] ={new FocoInteligente("Phillips"), new CerraduraInteligente("Yale")};
+                    
         miCasa[0].encender();
         miCasa[0].MostrarMarca();
         ((Conexiones)miCasa[0]).conectarRed();
