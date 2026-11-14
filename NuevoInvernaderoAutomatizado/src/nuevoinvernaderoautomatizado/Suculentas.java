@@ -8,7 +8,6 @@ package nuevoinvernaderoautomatizado;
  *
  * @author cmu08_12mttuz
  */
-
 public class Suculentas extends Planta implements Tratables {
 
     // Constructor
