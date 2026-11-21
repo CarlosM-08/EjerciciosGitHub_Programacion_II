@@ -4,6 +4,8 @@
  */
 package vista;
 
+import java.awt.Color;
+
 /**
  *
  * @author cmu08_12mttuz
@@ -57,6 +59,14 @@ public class FrmTiendaVideojuegos extends javax.swing.JFrame {
         pnlRegistro.setBorder(javax.swing.BorderFactory.createTitledBorder("Datos del Videojuego"));
         pnlRegistro.setToolTipText("Sección de ingreso de datos");
         pnlRegistro.setPreferredSize(new java.awt.Dimension(340, 330));
+        pnlRegistro.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                pnlRegistroMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                pnlRegistroMouseExited(evt);
+            }
+        });
 
         jLabel1.setText("Título: ");
 
@@ -82,6 +92,14 @@ public class FrmTiendaVideojuegos extends javax.swing.JFrame {
         txtTitulo.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         txtTitulo.setToolTipText("Nombre del juego");
         txtTitulo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(180, 190, 205)));
+        txtTitulo.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtTituloFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtTituloFocusLost(evt);
+            }
+        });
         txtTitulo.addActionListener(this::txtTituloActionPerformed);
 
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -275,6 +293,41 @@ public class FrmTiendaVideojuegos extends javax.swing.JFrame {
     private void txtTituloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTituloActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtTituloActionPerformed
+
+    private void pnlRegistroMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlRegistroMouseEntered
+        // TODO add your handling code here:
+
+        pnlRegistro.setBackground(new java.awt.Color(230, 240, 250));
+
+        lblEstado.setText("Estado: Editando datos del videojuego...");
+
+    }//GEN-LAST:event_pnlRegistroMouseEntered
+
+    private void pnlRegistroMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlRegistroMouseExited
+        // TODO add your handling code here:
+
+        pnlRegistro.setBackground(new java.awt.Color(245, 247, 250));
+
+        lblEstado.setText("Estado: Listo para registrar un nuevo videojuego...");
+
+    }//GEN-LAST:event_pnlRegistroMouseExited
+
+    private void txtTituloFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtTituloFocusGained
+        // TODO add your handling code here:
+        txtTitulo.setBackground(new java.awt.Color(230, 240, 250));
+        lblEstado.setText("Ingrese el título del videojuego...");
+
+    }//GEN-LAST:event_txtTituloFocusGained
+
+    private void txtTituloFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtTituloFocusLost
+        // TODO add your handling code here:
+        txtTitulo.setBackground(java.awt.Color.WHITE);
+
+        if (txtTitulo.getText().trim().isEmpty()) {
+            lblEstado.setText("Advertencia: debe ingresar el título del videojuego.");
+        }
+        
+    }//GEN-LAST:event_txtTituloFocusLost
 
     /**
      * @param args the command line arguments
