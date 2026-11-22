@@ -39,7 +39,7 @@ public class FrmTiendaVideojuegos extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         txtPrecio = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cmbGenero = new javax.swing.JComboBox<>();
         rbtFisico = new javax.swing.JRadioButton();
         jLabel4 = new javax.swing.JLabel();
         rbtDigital = new javax.swing.JRadioButton();
@@ -113,18 +113,35 @@ public class FrmTiendaVideojuegos extends javax.swing.JFrame {
         txtPrecio.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtPrecio.setToolTipText("Solo números (ej. 59.99)");
         txtPrecio.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(180, 190, 205)));
+        txtPrecio.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtPrecioFocusGained(evt);
+            }
+        });
+        txtPrecio.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtPrecioKeyTyped(evt);
+            }
+        });
 
-        jComboBox1.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
-        jComboBox1.setForeground(new java.awt.Color(27, 54, 93));
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Acción", "RPG", "Deportes", "Aventura", "Indie" }));
-        jComboBox1.setToolTipText("Despliegue para seleccionar el género");
-        jComboBox1.setEditor(null);
+        cmbGenero.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
+        cmbGenero.setForeground(new java.awt.Color(27, 54, 93));
+        cmbGenero.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Acción", "RPG", "Deportes", "Aventura", "Indie" }));
+        cmbGenero.setToolTipText("Despliegue para seleccionar el género");
+        cmbGenero.setEditor(null);
+        cmbGenero.addItemListener(this::cmbGeneroItemStateChanged);
+        cmbGenero.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                cmbGeneroFocusGained(evt);
+            }
+        });
 
         btgFormato.add(rbtFisico);
         rbtFisico.setForeground(new java.awt.Color(27, 54, 93));
         rbtFisico.setSelected(true);
         rbtFisico.setText("Fisico (+$8.50 envío)");
         rbtFisico.setToolTipText("Selecciona modalidad JuegoFisico");
+        rbtFisico.addActionListener(this::rbtFisicoActionPerformed);
 
         jLabel4.setText("Formato:");
 
@@ -169,7 +186,7 @@ public class FrmTiendaVideojuegos extends javax.swing.JFrame {
                                 .addGroup(pnlRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txtTitulo)
                                     .addComponent(txtPrecio)
-                                    .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                                    .addComponent(cmbGenero, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                     .addGroup(pnlRegistroLayout.createSequentialGroup()
                         .addGroup(pnlRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(pnlRegistroLayout.createSequentialGroup()
@@ -186,7 +203,7 @@ public class FrmTiendaVideojuegos extends javax.swing.JFrame {
                                 .addGroup(pnlRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(chkEdicionEspecial, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
                                     .addComponent(chkDLC, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                        .addGap(0, 28, Short.MAX_VALUE)))
+                        .addGap(0, 27, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         pnlRegistroLayout.setVerticalGroup(
@@ -203,7 +220,7 @@ public class FrmTiendaVideojuegos extends javax.swing.JFrame {
                 .addGap(9, 9, 9)
                 .addGroup(pnlRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cmbGenero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(38, 38, 38)
                 .addGroup(pnlRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(rbtFisico)
@@ -329,6 +346,46 @@ public class FrmTiendaVideojuegos extends javax.swing.JFrame {
         
     }//GEN-LAST:event_txtTituloFocusLost
 
+    private void txtPrecioFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPrecioFocusGained
+        // TODO add your handling code here:
+        txtPrecio.setBackground(new Color(255, 253, 231));
+        lblEstado.setText("Ingrese el precio base en dólares (ejemplo: 59.99).");
+    }//GEN-LAST:event_txtPrecioFocusGained
+
+    private void txtPrecioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPrecioKeyTyped
+        // TODO add your handling code here:
+
+        char c = evt.getKeyChar();
+
+        if (!Character.isDigit(c) && c != '.'
+                && !Character.isISOControl(c)) {
+            evt.consume();
+        }
+
+        if (c == '.' && txtPrecio.getText().contains(".")) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtPrecioKeyTyped
+
+    private void cmbGeneroItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbGeneroItemStateChanged
+        // TODO add your handling code here:
+        if (evt.getStateChange() == java.awt.event.ItemEvent.SELECTED) {
+            String generoElegido = cmbGenero.getSelectedItem().toString();
+
+            lblEstado.setText("Género seleccionado: " + generoElegido);
+        }
+    }//GEN-LAST:event_cmbGeneroItemStateChanged
+
+    private void cmbGeneroFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cmbGeneroFocusGained
+        // TODO add your handling code here:
+        lblEstado.setText("Use el mouse o las flechas para elegir un género.");
+    }//GEN-LAST:event_cmbGeneroFocusGained
+
+    private void rbtFisicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtFisicoActionPerformed
+        // TODO add your handling code here:
+        lblEstado.setText("Formato Físico seleccionado: se sumará $8.50 por envío.");
+    }//GEN-LAST:event_rbtFisicoActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -360,7 +417,7 @@ public class FrmTiendaVideojuegos extends javax.swing.JFrame {
     private javax.swing.JButton btnRegistrar;
     private javax.swing.JCheckBox chkDLC;
     private javax.swing.JCheckBox chkEdicionEspecial;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> cmbGenero;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
