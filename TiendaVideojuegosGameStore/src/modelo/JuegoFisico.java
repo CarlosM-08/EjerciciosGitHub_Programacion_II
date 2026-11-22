@@ -29,7 +29,7 @@ public double calcularPrecioFinal() {
 public String generarFicha() {
 String ficha = super.generarFicha();
 
-ficha += "Formato: FiSICO\n";
+ficha += "Formato: FISICO\n";
     ficha += String.format("Costo de envio: $%.2f\n", costoEnvio);
     ficha += String.format("TOTAL A PAGAR: $%.2f\n", calcularPrecioFinal());
 
