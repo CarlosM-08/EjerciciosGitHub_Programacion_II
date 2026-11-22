@@ -201,6 +201,11 @@
               <Color id="Cursor de Mano"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnRegistrarMouseEntered"/>
+            <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnRegistrarMouseExited"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRegistrarActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnLimpiar">
           <Properties>
@@ -221,6 +226,8 @@
             </Property>
           </Properties>
           <Events>
+            <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnLimpiarMouseEntered"/>
+            <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnLimpiarMouseExited"/>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLimpiarActionPerformed"/>
           </Events>
         </Component>
@@ -326,6 +333,7 @@
             <Property name="toolTipText" type="java.lang.String" value="Selecciona modalidad JuegoFisico"/>
           </Properties>
           <Events>
+            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="rbtFisicoItemStateChanged"/>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rbtFisicoActionPerformed"/>
           </Events>
         </Component>
@@ -345,6 +353,10 @@
             <Property name="text" type="java.lang.String" value="Digital (-10% desc.)"/>
             <Property name="toolTipText" type="java.lang.String" value="Selecciona modalidad JuegoDigital"/>
           </Properties>
+          <Events>
+            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="rbtDigitalItemStateChanged"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rbtDigitalActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel5">
           <Properties>
@@ -360,6 +372,10 @@
             <Property name="text" type="java.lang.String" value="Incluir DLC (+$15.00)"/>
             <Property name="toolTipText" type="java.lang.String" value="Agrega expansi&#xf3;n descargable"/>
           </Properties>
+          <Events>
+            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="chkDLCItemStateChanged"/>
+            <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="chkDLCMouseEntered"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JCheckBox" name="chkEdicionEspecial">
           <Properties>
@@ -370,6 +386,10 @@
             <Property name="text" type="java.lang.String" value="Edici&#xf3;n Especial (+20%)"/>
             <Property name="toolTipText" type="java.lang.String" value="Caja met&#xe1;lica y arte"/>
           </Properties>
+          <Events>
+            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="chkEdicionEspecialItemStateChanged"/>
+            <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="chkEdicionEspecialMouseEntered"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -437,6 +457,10 @@
                 <Property name="rows" type="int" value="14"/>
                 <Property name="wrapStyleWord" type="boolean" value="true"/>
               </Properties>
+              <Events>
+                <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txaResumenFocusGained"/>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="txaResumenMouseClicked"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>

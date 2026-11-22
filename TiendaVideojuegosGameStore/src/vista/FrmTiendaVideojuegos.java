@@ -6,6 +6,11 @@ package vista;
 
 import java.awt.Color;
 
+import javax.swing.JOptionPane;
+import modelo.Videojuego;
+import modelo.JuegoFisico;
+import modelo.JuegoDigital;
+
 /**
  *
  * @author cmu08_12mttuz
@@ -77,6 +82,15 @@ public class FrmTiendaVideojuegos extends javax.swing.JFrame {
         btnRegistrar.setText("Cotizar Juego");
         btnRegistrar.setToolTipText("Calcula y genera el ticket");
         btnRegistrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnRegistrar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnRegistrarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnRegistrarMouseExited(evt);
+            }
+        });
+        btnRegistrar.addActionListener(this::btnRegistrarActionPerformed);
 
         btnLimpiar.setBackground(new java.awt.Color(100, 116, 139));
         btnLimpiar.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
@@ -85,6 +99,14 @@ public class FrmTiendaVideojuegos extends javax.swing.JFrame {
         btnLimpiar.setText("Limpiar");
         btnLimpiar.setToolTipText("Restablece campos");
         btnLimpiar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnLimpiar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnLimpiarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnLimpiarMouseExited(evt);
+            }
+        });
         btnLimpiar.addActionListener(this::btnLimpiarActionPerformed);
 
         txtTitulo.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
@@ -141,6 +163,7 @@ public class FrmTiendaVideojuegos extends javax.swing.JFrame {
         rbtFisico.setSelected(true);
         rbtFisico.setText("Fisico (+$8.50 envío)");
         rbtFisico.setToolTipText("Selecciona modalidad JuegoFisico");
+        rbtFisico.addItemListener(this::rbtFisicoItemStateChanged);
         rbtFisico.addActionListener(this::rbtFisicoActionPerformed);
 
         jLabel4.setText("Formato:");
@@ -149,6 +172,8 @@ public class FrmTiendaVideojuegos extends javax.swing.JFrame {
         rbtDigital.setForeground(new java.awt.Color(27, 54, 93));
         rbtDigital.setText("Digital (-10% desc.)");
         rbtDigital.setToolTipText("Selecciona modalidad JuegoDigital");
+        rbtDigital.addItemListener(this::rbtDigitalItemStateChanged);
+        rbtDigital.addActionListener(this::rbtDigitalActionPerformed);
 
         jLabel5.setText("Extras:");
 
@@ -156,11 +181,23 @@ public class FrmTiendaVideojuegos extends javax.swing.JFrame {
         chkDLC.setMnemonic('D');
         chkDLC.setText("Incluir DLC (+$15.00)");
         chkDLC.setToolTipText("Agrega expansión descargable");
+        chkDLC.addItemListener(this::chkDLCItemStateChanged);
+        chkDLC.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                chkDLCMouseEntered(evt);
+            }
+        });
 
         chkEdicionEspecial.setForeground(new java.awt.Color(45, 55, 72));
         chkEdicionEspecial.setMnemonic('E');
         chkEdicionEspecial.setText("Edición Especial (+20%)");
         chkEdicionEspecial.setToolTipText("Caja metálica y arte");
+        chkEdicionEspecial.addItemListener(this::chkEdicionEspecialItemStateChanged);
+        chkEdicionEspecial.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                chkEdicionEspecialMouseEntered(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlRegistroLayout = new javax.swing.GroupLayout(pnlRegistro);
         pnlRegistro.setLayout(pnlRegistroLayout);
@@ -253,6 +290,16 @@ public class FrmTiendaVideojuegos extends javax.swing.JFrame {
         txaResumen.setLineWrap(true);
         txaResumen.setRows(14);
         txaResumen.setWrapStyleWord(true);
+        txaResumen.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txaResumenFocusGained(evt);
+            }
+        });
+        txaResumen.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txaResumenMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(txaResumen);
 
         javax.swing.GroupLayout pnlResumenLayout = new javax.swing.GroupLayout(pnlResumen);
@@ -305,6 +352,26 @@ public class FrmTiendaVideojuegos extends javax.swing.JFrame {
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
         // TODO add your handling code here:
+        // Limpiar los campos de texto
+        txtTitulo.setText("");
+        txtPrecio.setText("");
+        txaResumen.setText("");
+
+// Restaurar el color de los campos
+        txtTitulo.setBackground(Color.WHITE);
+        txtPrecio.setBackground(Color.WHITE);
+
+// Restablecer las selecciones
+        cmbGenero.setSelectedIndex(0);
+        rbtFisico.setSelected(true);
+        chkDLC.setSelected(false);
+        chkEdicionEspecial.setSelected(false);
+
+// Actualizar el estado del formulario
+        lblEstado.setText("Formulario reiniciado. Listo para una nueva cotización.");
+
+// Colocar el cursor en el campo Título
+        txtTitulo.requestFocusInWindow();
     }//GEN-LAST:event_btnLimpiarActionPerformed
 
     private void txtTituloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTituloActionPerformed
@@ -385,6 +452,165 @@ public class FrmTiendaVideojuegos extends javax.swing.JFrame {
         // TODO add your handling code here:
         lblEstado.setText("Formato Físico seleccionado: se sumará $8.50 por envío.");
     }//GEN-LAST:event_rbtFisicoActionPerformed
+
+    private void rbtFisicoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rbtFisicoItemStateChanged
+        // TODO add your handling code here:
+        if (rbtFisico.isSelected()) {
+            rbtFisico.setForeground(new Color(13, 110, 138));
+        } else {
+            rbtFisico.setForeground(new Color(27, 54, 93));
+        }
+    }//GEN-LAST:event_rbtFisicoItemStateChanged
+
+    private void rbtDigitalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtDigitalActionPerformed
+        // TODO add your handling code here:
+        lblEstado.setText("Formato Digital seleccionado: 10% de descuento y clave de activación.");
+    }//GEN-LAST:event_rbtDigitalActionPerformed
+
+    private void rbtDigitalItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rbtDigitalItemStateChanged
+        // TODO add your handling code here:
+        if (rbtDigital.isSelected()) {
+            rbtDigital.setForeground(new Color(13, 110, 138));
+        } else {
+            rbtDigital.setForeground(new Color(27, 54, 93));
+        }
+    }//GEN-LAST:event_rbtDigitalItemStateChanged
+
+    private void chkDLCItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_chkDLCItemStateChanged
+        // TODO add your handling code here:
+        if (chkDLC.isSelected()) {
+            lblEstado.setText("Extra agregado: Paquete DLC (+$15.00).");
+        } else {
+            lblEstado.setText("Extra removido: Paquete DLC.");
+        }
+    }//GEN-LAST:event_chkDLCItemStateChanged
+
+    private void chkDLCMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_chkDLCMouseEntered
+        // TODO add your handling code here:
+        lblEstado.setText("DLC incluye mapas y misiones descargables adicionales.");
+    }//GEN-LAST:event_chkDLCMouseEntered
+
+    private void chkEdicionEspecialItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_chkEdicionEspecialItemStateChanged
+        // TODO add your handling code here:
+        if (chkEdicionEspecial.isSelected()) {
+            lblEstado.setText("Extra agregado: Edición Especial (+20% sobre precio base).");
+        } else {
+            lblEstado.setText("Extra removido: Edición Especial.");
+        }
+    }//GEN-LAST:event_chkEdicionEspecialItemStateChanged
+
+    private void chkEdicionEspecialMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_chkEdicionEspecialMouseEntered
+        // TODO add your handling code here:
+        lblEstado.setText("Edición Especial incluye caja metálica y arte exclusivo (+20%).");
+    }//GEN-LAST:event_chkEdicionEspecialMouseEntered
+
+    private void btnRegistrarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegistrarMouseEntered
+        // TODO add your handling code here:
+        btnRegistrar.setBackground(new Color(13, 110, 138));
+    }//GEN-LAST:event_btnRegistrarMouseEntered
+
+    private void btnRegistrarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegistrarMouseExited
+        // TODO add your handling code here:
+        btnRegistrar.setBackground(new Color(27, 54, 93));
+    }//GEN-LAST:event_btnRegistrarMouseExited
+
+    private void btnLimpiarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLimpiarMouseEntered
+        // TODO add your handling code here:
+        btnLimpiar.setBackground(new Color(71, 85, 105));
+    }//GEN-LAST:event_btnLimpiarMouseEntered
+
+    private void btnLimpiarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLimpiarMouseExited
+        // TODO add your handling code here:
+        btnLimpiar.setBackground(new Color(100, 116, 139));
+    }//GEN-LAST:event_btnLimpiarMouseExited
+
+    private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
+        // TODO add your handling code here:
+        // Leer los datos ingresados
+        String titulo = txtTitulo.getText().trim();
+        String precioTexto = txtPrecio.getText().trim();
+
+// Validar campos obligatorios
+        if (titulo.isEmpty() || precioTexto.isEmpty()) {
+            JOptionPane.showMessageDialog(this,
+                    "Por favor, complete el título y el precio base.",
+                    "Campos incompletos",
+                    JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+// Convertir y validar el precio
+        double precioBase;
+
+        try {
+            precioBase = Double.parseDouble(precioTexto);
+
+            if (!Double.isFinite(precioBase) || precioBase <= 0) {
+                JOptionPane.showMessageDialog(this,
+                        "El precio debe ser mayor que cero.",
+                        "Precio inválido",
+                        JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this,
+                    "Ingrese un precio numérico válido.",
+                    "Error de formato",
+                    JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+// Obtener el género y los extras seleccionados
+        String genero = cmbGenero.getSelectedItem().toString();
+
+        boolean incluyeDLC = chkDLC.isSelected();
+        boolean esEdicionEspecial = chkEdicionEspecial.isSelected();
+
+// Crear el objeto según el formato seleccionado
+        Videojuego juego;
+
+        if (rbtFisico.isSelected()) {
+
+            juego = new JuegoFisico(
+                    titulo, genero, precioBase,
+                    incluyeDLC, esEdicionEspecial, 8.50
+            );
+
+        } else {
+
+            juego = new JuegoDigital(
+                    titulo, genero, precioBase,
+                    incluyeDLC, esEdicionEspecial, 0.10
+            );
+        }
+
+// Generar el ticket de cotización
+        txaResumen.setText(juego.generarFicha());
+
+// Actualizar el estado
+        lblEstado.setText(
+                "Cotización generada exitosamente para: "
+                + juego.getTitulo()
+        );
+
+    }//GEN-LAST:event_btnRegistrarActionPerformed
+
+    private void txaResumenMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txaResumenMouseClicked
+        // TODO add your handling code here:
+        if (!txaResumen.getText().isEmpty()) {
+            txaResumen.selectAll();
+
+            lblEstado.setText(
+                    "Ticket seleccionado. Presione Ctrl+C si desea copiarlo."
+            );
+        }
+    }//GEN-LAST:event_txaResumenMouseClicked
+
+    private void txaResumenFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txaResumenFocusGained
+        // TODO add your handling code here:
+        lblEstado.setText("Visualizando el resumen de cotización generado por POO.");
+    }//GEN-LAST:event_txaResumenFocusGained
 
     /**
      * @param args the command line arguments
