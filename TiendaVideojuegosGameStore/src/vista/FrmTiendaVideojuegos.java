@@ -76,7 +76,7 @@ public class FrmTiendaVideojuegos extends javax.swing.JFrame {
         jLabel1.setText("Título: ");
 
         btnRegistrar.setBackground(new java.awt.Color(27, 54, 93));
-        btnRegistrar.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
+        btnRegistrar.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
         btnRegistrar.setForeground(new java.awt.Color(255, 255, 255));
         btnRegistrar.setMnemonic('C');
         btnRegistrar.setText("Cotizar Juego");
@@ -93,7 +93,7 @@ public class FrmTiendaVideojuegos extends javax.swing.JFrame {
         btnRegistrar.addActionListener(this::btnRegistrarActionPerformed);
 
         btnLimpiar.setBackground(new java.awt.Color(100, 116, 139));
-        btnLimpiar.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
+        btnLimpiar.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
         btnLimpiar.setForeground(new java.awt.Color(255, 255, 255));
         btnLimpiar.setMnemonic('L');
         btnLimpiar.setText("Limpiar");
@@ -150,7 +150,6 @@ public class FrmTiendaVideojuegos extends javax.swing.JFrame {
         cmbGenero.setForeground(new java.awt.Color(27, 54, 93));
         cmbGenero.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Acción", "RPG", "Deportes", "Aventura", "Indie" }));
         cmbGenero.setToolTipText("Despliegue para seleccionar el género");
-        cmbGenero.setEditor(null);
         cmbGenero.addItemListener(this::cmbGeneroItemStateChanged);
         cmbGenero.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -159,6 +158,7 @@ public class FrmTiendaVideojuegos extends javax.swing.JFrame {
         });
 
         btgFormato.add(rbtFisico);
+        rbtFisico.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         rbtFisico.setForeground(new java.awt.Color(27, 54, 93));
         rbtFisico.setSelected(true);
         rbtFisico.setText("Fisico (+$8.50 envío)");
@@ -169,6 +169,7 @@ public class FrmTiendaVideojuegos extends javax.swing.JFrame {
         jLabel4.setText("Formato:");
 
         btgFormato.add(rbtDigital);
+        rbtDigital.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         rbtDigital.setForeground(new java.awt.Color(27, 54, 93));
         rbtDigital.setText("Digital (-10% desc.)");
         rbtDigital.setToolTipText("Selecciona modalidad JuegoDigital");
@@ -240,7 +241,7 @@ public class FrmTiendaVideojuegos extends javax.swing.JFrame {
                                 .addGroup(pnlRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(chkEdicionEspecial, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
                                     .addComponent(chkDLC, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                        .addGap(0, 27, Short.MAX_VALUE)))
+                        .addGap(0, 17, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         pnlRegistroLayout.setVerticalGroup(
