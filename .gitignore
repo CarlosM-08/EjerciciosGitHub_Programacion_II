@@ -60,3 +60,6 @@ replay_pid*
 /Menus/dist/
 /Menus/nbproject/private/
 /Menus/build/
+/RegistroDatos/nbproject/private/
+/RegistroDatos/build/
+/RegistroDatos/dist/
